@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.schemas.recommendation_schema import RecommendationRequest, RecommendationResponse
 from app.services.recommendation_service import get_recommendations
+from app.models.history import History
 
 router = APIRouter()
 
