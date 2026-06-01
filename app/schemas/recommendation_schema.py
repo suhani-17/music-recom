@@ -9,7 +9,12 @@ class Mood(str, Enum):
     calm = "calm"
     energetic = "energetic"
 
+class Language(str, Enum):
+    english = "english"
+    spanish = "spanish"
+
+
 
 class RecommendationRequest(BaseModel):
     mood : Mood
-    language: str
+    language: Language
