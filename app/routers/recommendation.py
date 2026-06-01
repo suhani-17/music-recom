@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.db.database import get_db
-from app.schemas.recommendation_schema import RecommendationRequest
+from app.schemas.recommendation_schema import RecommendationRequest, RecommendationResponse
 from app.services.recommendation_service import get_recommendations
 
 router = APIRouter()
 
-@router.post("/recommendations")
+@router.post("/recommendations", response_model=RecommendationResponse)
 async def recommend(data: RecommendationRequest, db: Session = Depends(get_db)):
     result = await get_recommendations(data.mood, data.language)
 

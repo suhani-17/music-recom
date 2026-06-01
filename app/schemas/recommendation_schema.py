@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
+from typing import List, Optional
 
 #we are excepting string to return string in response to that it works cleanly with json 
 
@@ -18,3 +19,16 @@ class Language(str, Enum):
 class RecommendationRequest(BaseModel):
     mood : Mood
     language: Language
+
+
+class TrackResponse(BaseModel):
+    id: str
+    title: str
+    artist: str
+    image_url: Optional[str] = None
+    preview_url: Optional[str] = None
+
+class RecommendationResponse(BaseModel):
+    success: bool
+    status_code: int
+    data: List[TrackResponse]
