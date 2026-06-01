@@ -24,8 +24,17 @@ async def fetch_spotify_data(query: str, token: str):
 
 
 async def get_recommendations ( mood: str, language: str) : 
-
-   query = f"{mood} {language}"
+   
+   mood_keywords = {
+    "happy": "feel good upbeat party",
+    "sad": "melancholic heartbreak slow",
+    "calm": "peaceful relaxing acoustic",
+    "energetic": "workout dance high energy"
+    }
+   
+   keywords = mood_keywords.get(mood, mood)
+   
+   query = f"{keywords} {language}"
 
    token = await get_spotify_token()
 
