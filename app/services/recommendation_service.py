@@ -2,6 +2,8 @@ import httpx
 import os
 from dotenv import load_dotenv
 from app.services.spotify_service import get_spotify_token
+from fastapi import HTTPException
+
 
 load_dotenv()
 
@@ -46,16 +48,16 @@ async def get_recommendations ( mood: str, language: str) :
       response = await fetch_spotify_data(query, token) 
 
       if response.status_code == 401:
-            raise Exception("Spotify authentication failed")
+            raise HTTPException(status_code=401, detail="Spotify authentication failed")
 
    #other errors 
    if response.status_code != 200:
-      raise Exception(f"Spotify API error: {response.status_code} - {response.text}")
+      raise HTTPException(status_code=response.status_code, detail=f"Spotify API error: {response.text}")
 
    try: 
        data = response.json()
    except Exception as e:
-         raise Exception(f"Invalid Response!: {str(e)}")  
+         raise HTTPException(status_code=500, detail=f"Invalid Response!: {str(e)}")  
 
    tracks = data.get("tracks", {}).get("items", [])
    return transform_tracks(tracks)
