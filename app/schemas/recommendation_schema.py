@@ -26,6 +26,7 @@ class TrackResponse(BaseModel):
     artist: str
     image_url: Optional[str] = None
     preview_url: Optional[str] = None
+    spotify_url: Optional[str] = None
 
 class RecommendationResponse(BaseModel):
     success: bool
