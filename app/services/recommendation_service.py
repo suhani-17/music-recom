@@ -87,6 +87,9 @@ def transform_tracks(tracks):
          # Extract preview URL
          preview_url = track.get("preview_url")
 
+         # Extract Spotify URL
+         spotify_url = track.get("external_urls", {}).get("spotify")
+
          if not track_id or not title:
              continue
          
@@ -95,7 +98,8 @@ def transform_tracks(tracks):
              "title": title,
              "artist": artist_name,
              "image_url": image_url,
-             "preview_url": preview_url
+             "preview_url": preview_url,
+             "spotify_url": spotify_url
          })
    
      return result
